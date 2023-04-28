@@ -29,8 +29,8 @@ count = length(var.components)
     Name = var.components[count.index]
   }
   }
-  output "frontend" {
-  value = aws_instance.frontend.public_ip
+  output "instancename" {
+  value = aws_instance.var.components[count.index].public_ip
   }
 #   resource "aws_route53_record" "var.components[count.index]" {
 #     zone_id = "Z0941133DH3UYAXI04QH"
