@@ -4,7 +4,7 @@ data "aws_ami" "centos"{
   most_recent      = true
   name_regex       = "Centos-8-DevOps-Practice"
 }
-variable "instancetype"{
+variable "instance_type"{
 default = "t3.small"
 }
  data "aws_security_group" "selected" {
