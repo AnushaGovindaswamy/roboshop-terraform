@@ -17,7 +17,7 @@ output "aws_ami" {
 value=data.aws_ami.centos.image_id
 }
 variable "components" {
-default = ["frontend","mongodb","catalogue","redis","cart","user","shipping","payment"mysql","dispatch"]
+default = ["frontend","mongodb","catalogue","redis","cart","user","shipping","payment","mysql","dispatch"]
 }
 resource "aws_instance" "frontend" {
 count = length(var.components)
