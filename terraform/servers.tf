@@ -4,12 +4,22 @@ data "aws_ami" "centos"{
   most_recent      = true
   name_regex       = "Centos-8-DevOps-Practice"
 }
+variable "instancetype"{
+default = "t3.small"
+}
+ data "aws_security_group" "selected" {
+ name ="allow-all"
+ }
+ output "securitygroup" {
+ value = data.aws_security_group.selected.id
+ }
 output "aws_ami" {
 value=data.aws_ami.centos.image_id
 }
 resource "aws_instance" "frontend" {
   ami           = data.aws_ami.centos.image_id
-  instance_type = "t3.micro"
+  instance_type = var.instance_type
+  vpc_security_group_ids = [data.aws_security_group.selected.id]
 
   tags = {
     Name = "frontend"
@@ -27,7 +37,8 @@ resource "aws_instance" "frontend" {
   }
   resource "aws_instance" "mongodb" {
     ami           = data.aws_ami.centos.image_id
-    instance_type = "t3.micro"
+    instance_type = "var.instancetype"
+    vpc_security_group_ids = [data.aws_security_group.selected.id]
 
     tags = {
       Name = "mongodb"
@@ -42,7 +53,7 @@ resource "aws_instance" "frontend" {
       }
   resource "aws_instance" "catalogue" {
      ami           = data.aws_ami.centos.image_id
-     instance_type = "t3.micro"
+     instance_type = "var.instancetype"
 
      tags = {
        Name = "catalogue"
@@ -57,7 +68,7 @@ resource "aws_instance" "frontend" {
            }
    resource "aws_instance" "redis" {
       ami           = data.aws_ami.centos.image_id
-      instance_type = "t3.micro"
+      instance_type = "var.instancetype"
 
       tags = {
         Name = "redis"
@@ -72,7 +83,7 @@ resource "aws_instance" "frontend" {
                  }
     resource "aws_instance" "user" {
        ami           = data.aws_ami.centos.image_id
-       instance_type = "t3.micro"
+       instance_type = "var.instancetype"
 
        tags = {
          Name = "user"
@@ -87,7 +98,7 @@ resource "aws_instance" "frontend" {
                         }
    resource "aws_instance" "cart" {
       ami           = data.aws_ami.centos.image_id
-      instance_type = "t3.micro"
+      instance_type = "var.instancetype"
 
       tags = {
         Name = "cart"
@@ -102,7 +113,7 @@ resource "aws_instance" "frontend" {
                               }
    resource "aws_instance" "mysql" {
       ami           = data.aws_ami.centos.image_id
-      instance_type = "t3.micro"
+      instance_type = "var.instancetype"
 
       tags = {
         Name = "mysql"
@@ -117,7 +128,7 @@ resource "aws_instance" "frontend" {
                               }
     resource "aws_instance" "shipping" {
        ami           = data.aws_ami.centos.image_id
-       instance_type = "t3.micro"
+       instance_type = "var.instancetype"
 
        tags = {
          Name = "shipping"
@@ -132,7 +143,7 @@ resource "aws_instance" "frontend" {
                                      }
        resource "aws_instance" "rabbitmq" {
              ami           = data.aws_ami.centos.image_id
-             instance_type = "t3.micro"
+             instance_type = "var.instancetype"
 
              tags = {
                Name = "rabbitmq"
@@ -147,7 +158,7 @@ resource "aws_instance" "frontend" {
                    }
            resource "aws_instance" "payment" {
               ami           = data.aws_ami.centos.image_id
-              instance_type = "t3.micro"
+              instance_type = "var.instancetype"
 
               tags = {
                 Name = "payment"
@@ -162,7 +173,7 @@ resource "aws_instance" "frontend" {
                     }
               resource "aws_instance" "dispatch" {
                             ami           = data.aws_ami.centos.image_id
-                            instance_type = "t3.micro"
+                            instance_type = "var.instancetype"
 
                             tags = {
                               Name = "dispatch"
