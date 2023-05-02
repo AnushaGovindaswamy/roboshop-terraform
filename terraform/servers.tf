@@ -89,7 +89,7 @@ for-each =var.components
     ttl     = 30
     records = [aws_instance.instance[each.value["name"]].private_ip]
   }
-  resource "aws_instance" "instance" {
+  resource "aws_instance" "instance2" {
   count =length(var.components2)
     ami           = data.aws_ami.centos.image_id
     instance_type = "var.instancetype"
@@ -99,7 +99,7 @@ for-each =var.components
       Name = var.components2[count.index]
     }
     }
-    resource "aws_route53_record" " var.components2[count.index] {
+    resource "aws_route53_record" "var.components2[count.index]" {
         zone_id = "Z0941133DH3UYAXI04QH"
         name    = " ${var.components2[count.index]}-dev.anushadevopsb72.online"
         type    = "A"
