@@ -4,7 +4,7 @@ data "aws_ami" "centos"{
   most_recent      = true
   name_regex       = "Centos-8-DevOps-Practice"
 }
-variable "instance_type2"{
+variable "instance_type"{
 default = "t3.small"
 }
  data "aws_security_group" "selected" {
@@ -84,7 +84,7 @@ resource "aws_instance" "instance" {
 resource "aws_route53_record" "records" {
   for_each               = var.components
   zone_id = "Z03986262CQPCHNJNZM9L"
-  name    = "${each.value["name"]}-dev.rdevopsb72.online"
+  name    = "${each.value["name"]}-dev.anushadevopsb72.online"
   type    = "A"
   ttl     = 30
   records = [aws_instance.instance[each.value["name"]].private_ip]
@@ -93,7 +93,7 @@ resource "aws_route53_record" "records" {
   resource "aws_instance" "instance2" {
   count =length(var.components2)
     ami           = data.aws_ami.centos.image_id
-    instance_type = "var.instancetype2"
+    instance_type = "var.instancetype"
     vpc_security_group_ids = [data.aws_security_group.selected.id]
 
     tags = {
