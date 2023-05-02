@@ -4,7 +4,7 @@ data "aws_ami" "centos"{
   most_recent      = true
   name_regex       = "Centos-8-DevOps-Practice"
 }
-variable "instance_type"{
+variable "instance_type2"{
 default = "t3.small"
 }
  data "aws_security_group" "selected" {
@@ -92,7 +92,7 @@ for-each =var.components
   resource "aws_instance" "instance2" {
   count =length(var.components2)
     ami           = data.aws_ami.centos.image_id
-    instance_type = "var.instancetype"
+    instance_type = "var.instancetype2"
     vpc_security_group_ids = [data.aws_security_group.selected.id]
 
     tags = {
