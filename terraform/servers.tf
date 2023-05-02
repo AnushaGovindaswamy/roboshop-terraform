@@ -106,6 +106,6 @@ resource "aws_route53_record" "records" {
         name    = " ${var.components2[count.index]}-dev.anushadevopsb72.online"
         type    = "A"
         ttl     = 30
-        records = [aws_instance.instance.var.components2[count.index].private_ip]
+        records = [aws_instance.var.components2[count.index].private_ip]
       }
 
