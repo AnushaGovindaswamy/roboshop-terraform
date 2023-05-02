@@ -68,27 +68,28 @@ name = "frontend"
 }
 
 }
+
 resource "aws_instance" "instance" {
-  for-each =var.components
-ami           = data.aws_ami.centos.image_id
-  instance_type = each.value["instance_type"]
-  vpc_security_group_ids = [data.aws_security_group.selected.id]
+  for_each               = var.components
+  ami                    = data.aws_ami.centos.image_id
+  instance_type          = each.value["instance_type"]
+  vpc_security_group_ids = [data.aws_security_group.allow-all.id]
 
   tags = {
     Name = each.value["name"]
   }
-  }
-#   output "instancename" {
-#   value = aws_instance.var.components[count.index].public_ip
-#   }
-  resource "aws_route53_record" "records" {
-  for-each =var.components
-    zone_id = "Z0941133DH3UYAXI04QH"
-    name    = "${each.value["name"]}-dev.anushadevopsb72.online"
-    type    = "A"
-    ttl     = 30
-    records = [aws_instance.instance[each.value["name"]].private_ip]
-  }
+}
+
+
+resource "aws_route53_record" "records" {
+  for_each               = var.components
+  zone_id = "Z03986262CQPCHNJNZM9L"
+  name    = "${each.value["name"]}-dev.rdevopsb72.online"
+  type    = "A"
+  ttl     = 30
+  records = [aws_instance.instance[each.value["name"]].private_ip]
+}
+
   resource "aws_instance" "instance2" {
   count =length(var.components2)
     ami           = data.aws_ami.centos.image_id
