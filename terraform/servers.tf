@@ -99,7 +99,8 @@ for-each =var.components
       Name = var.components2[count.index]
     }
     }
-    resource "aws_route53_record" "var.components2[count.index]" {
+    resource "aws_route53_record" "records" {
+     count =length(var.components2)
         zone_id = "Z0941133DH3UYAXI04QH"
         name    = " ${var.components2[count.index]}-dev.anushadevopsb72.online"
         type    = "A"
