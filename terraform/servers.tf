@@ -90,15 +90,6 @@ resource "aws_route53_record" "records" {
   records = [aws_instance.instance[each.value["name"]].private_ip]
 }
 
-  resource "aws_instance" "instance2" {
-  count =length(var.components2)
-    ami           = data.aws_ami.centos.image_id
-    instance_type = "var.instancetype"
-    vpc_security_group_ids = [data.aws_security_group.selected.id]
-
-    tags = {
-      Name = var.components2[count.index]
-    }
-    }
+  
 
 
