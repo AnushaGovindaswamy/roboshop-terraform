@@ -23,8 +23,8 @@ provisioner "remote-exec" {
     }
   inline = [
       "rm -rf roboshop-shell",
-      "https://github.com/AnushaGovindaswamy/roboshop-shell.git,
-      "cd roboshop-shell,
+      "https://github.com/AnushaGovindaswamy/roboshop-shell.git",
+      "cd roboshop-shell",
       "sudo bash ${each.value["name"]}.sh ${lookup(each.value,"password","null")}",
 
       ]
