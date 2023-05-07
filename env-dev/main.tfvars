@@ -12,6 +12,10 @@ name = "frontend"
    name = "catalogue"
       instance_type ="t3.micro"
     }
+     redis ={
+                    name = "redis"
+                       instance_type = "t3.small"
+                     }
      user ={
        name = "user"
           instance_type = "t3.micro"
@@ -39,9 +43,6 @@ name = "frontend"
               instance_type = "t3.small"
               pasword = "roboshop123"
             }
-     dispatch ={
-                name = "dispatch"
-                   instance_type = "t3.small"
-                 }
+
 }
 env = "dev"
